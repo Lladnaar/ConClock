@@ -1,5 +1,5 @@
 window.onload = function () { init(); }
 
 function init() {
-	new Timer(document.getElementById('timer'))
+	new Clock(document.getElementById('clock'))
 }
