@@ -1,0 +1,33 @@
+body {
+	background-color: black;
+	color: white;
+	margin: 0pt;
+	white-space:nowrap;
+	font-family: "Arial";
+	text-align: center;
+}
+
+.tile {
+	width: 128pt; height: 128pt;
+	text-align: center;
+	padding: 12pt;
+	border: solid white thin;
+	font-size: 16pt;
+}
+
+.tile:hover {
+	background-color: dimgray;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+img.icon {
+	width: 96pt; height: 96pt;
+}
+
+a:hover {
+	text-decoration: underline;
+}
