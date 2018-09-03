@@ -24,7 +24,17 @@ body {
 	margin: -72pt 0;
 }
 
+.settings {
+	visibility: hidden;
+	position: fixed; bottom: 0;
+	height: 25%; width: 100%;
+	background-color: darkblue;
+}
+
 .red { background-color: #ff0000; }
 .green { background-color: #008000; }
 .blue { background-color: #0000ff; }
 .orange { background-color: #ff8000; }
+
+.digit2 { width: 2.5em; }
+.digit4 { width: 4.5em; }
