@@ -28,7 +28,8 @@ body {
 	visibility: hidden;
 	position: fixed; bottom: 0;
 	height: 25%; width: 100%;
-	background-color: darkblue;
+	background-color: indigo;
+	padding: 12pt;
 }
 
 .red { background-color: #ff0000; }
@@ -38,3 +39,13 @@ body {
 
 .digit2 { width: 2.5em; }
 .digit4 { width: 4.5em; }
+
+.setting {
+	text-align: center;
+	width: 100%;
+}
+.buttons {
+	text-align: center;
+	width: 100%;
+	position: absolute; bottom: 12pt;
+}

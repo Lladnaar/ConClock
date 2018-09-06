@@ -1,5 +1,7 @@
+import { EventEmitter } from './eventemitter.js';
+
 // format time for display
-function formatTimeFragment(f) {
+export function format00(f) {
 	if (isNaN(f)) {
 		return '\u2013\u2013';
 	}
@@ -11,38 +13,43 @@ function formatTimeFragment(f) {
 	}
 }
 
-function formatTimeHMS(h, m, s) {
-	return formatTimeFragment(h) + ':' + formatTimeFragment(m) + ':' + formatTimeFragment(s);
+export function formatTimeHMS(h, m, s) {
+	if (h instanceof Date)
+		return formatTimeHMS(h.getHours(), h.getMinutes(), h.getSeconds());
+	else
+		return format00(h) + ':' + format00(m) + ':' + format00(s);
 }
 
-function formatTimeHM(h, m, s) {
-	return formatTimeFragment(h) + ':' + formatTimeFragment(m);
+export function formatTimeHM(h, m, s) {
+	if (h instanceof Date)
+		return formatTimeHM(h.getHours(), h.getMinutes(), h.getSeconds());
+	else
+		return format00(h) + ':' + format00(m);
 }
 
-function formatDurationHMS(h, m, s) {
-	return formatTimeFragment(h) + 'h' + formatTimeFragment(m) + 'm' + formatTimeFragment(s) + 's';
+export function formatDurationHMS(h, m, s) {
+	if (h instanceof Date)
+		return formatDurationHMS(h.getHours(), h.getMinutes(), h.getSeconds());
+	else
+		return format00(h) + 'h' + format00(m) + 'm' + format00(s) + 's';
 }
 
-function formatDurationHM(h, m, s) {
-	return formatTimeFragment(h) + 'h' + formatTimeFragment(m) + 'm';
+export function formatDurationHM(h, m, s) {
+	if (h instanceof Date)
+		return formatDurationHM(h.getHours(), h.getMinutes(), h.getSeconds());
+	else
+		return format00(h) + 'h' + format00(m) + 'm';
 }
 
 // timer class - Clock display
 
-export class Clock {
-	constructor(node) {
-		// initialise time
-		this.offset = localStorage.getItem("TimeOffset") ? localStorage.getItem("TimeOffset") : 0;
-		this.formatTime = formatTimeHMS;
-
-		// create time text node
-		this.display = document.createTextNode('');
-		node.appendChild(this.display);
-
-		// initialise clock display and update
-		var clock = this;
-		this.tick();
-		this.timer = setInterval(function() { clock.tick(); }, 1000);
+export class Clock extends EventEmitter {
+	constructor() {
+		super();
+		
+		// initialise clock
+		this.offset = 0;
+		this.timer = setInterval(function() { this.doTick(); }.bind(this), 500);
 	}
 
 	// calculate current time
@@ -53,12 +60,12 @@ export class Clock {
 	// set the timer
 	setTime(time) {
 		this.offset = time - Date.now()
-		localStorage.setItem("TimeOffset", this.offset);
+		return this;
 	}
 
 	// display current time
-	tick() {
-		var now = this.getTime();
-		this.display.textContent = this.formatTime(now.getHours(), now.getMinutes(), now.getSeconds());
+	doTick() {
+		this.emit('tick', this.getTime());
+		return this;
 	}
 }
