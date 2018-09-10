@@ -13,6 +13,7 @@ body {
 	padding: 12pt;
 	border: solid white thin;
 	font-size: 16pt;
+	display: inline-block;
 }
 
 .tile:hover {
@@ -26,8 +27,4 @@ a {
 
 img.icon {
 	width: 96pt; height: 96pt;
-}
-
-a:hover {
-	text-decoration: underline;
 }

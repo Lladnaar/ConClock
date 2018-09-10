@@ -1,7 +1,7 @@
 import * as common from './common.js';
 import * as timer from './timer.js';
 
-var clock = new timer.Clock();
+var clock = new timer.SmartClock();
 var settingTime = new timer.Clock();
 
 window.addEventListener("load", function () { init(); } );
@@ -32,7 +32,6 @@ function showSettings(event) {
 		document.body.off("keypress", showSettings);
 		document.getElementById("settings").style.visibility='visible';
 		document.getElementById("settings").on("keypress", keySettings);
-		document.getElementById("hour").focus();
 		
 		event.stopPropagation();
 	}

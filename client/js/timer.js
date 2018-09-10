@@ -69,3 +69,23 @@ export class Clock extends EventEmitter {
 		return this;
 	}
 }
+
+export class SmartClock extends Clock {
+	constructor() {
+		super().loadTime();
+	}
+	
+	setTime(time) {
+		return super.setTime(time).saveTime();
+	}
+	
+	saveTime() {
+		localStorage.setItem('ClockOffset', this.offset);
+		return this;
+	}
+	
+	loadTime() {
+		this.offset = Number(localStorage.getItem('ClockOffset'));
+		return this;
+	}
+}
